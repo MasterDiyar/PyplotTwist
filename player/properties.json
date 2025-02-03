@@ -1,0 +1,7 @@
+{
+  "name": "John Dave Harris",
+  "hp": 10,
+  "damage": [10, 12, 15, 17, 20],
+  "speed": [4.78, 5, 5.25, 5.61, 6],
+  "bullet_count": 6
+}
