@@ -9,6 +9,6 @@ class Button:
         return True
     def update(self, event):
         pygame.draw.rect(self.screen, self.colour, self.rect)
-        if event == pygame.MOUSEBUTTONDOWN and :
+        if event == pygame.MOUSEBUTTONDOWN:
             return self.clicked()
         

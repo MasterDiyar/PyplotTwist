@@ -1,12 +1,15 @@
 import pygame
+import buildings.connected as n
+from config.const import *
 
 pygame.init()
-sc = pygame.display.set_mode((1000, 800))
 
 run = True
 clock = pygame.time.Clock()
 allsprites = pygame.sprite.Group()
 clock.tick(60)
+m = n.Map(sc, "saves/firstmap.txt")
+l = m.draw()
 
 
 #allsprites.add()
@@ -17,7 +20,7 @@ while run:
     sc.fill((88, 88, 88))
     allsprites.update()
 
-
+    sc.blit(l,(128,64))    
 
 
 
