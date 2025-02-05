@@ -33,6 +33,22 @@ class Map:
                     case "8":
                         map.blit(tiles["MOUNTAIN"], (j*64, i*64))
         return map
+    
+
+class ClickMap(Map):
+    def __init__(self, surface, mapinfo):
+        super().__init__(surface, mapinfo)
+        self.starttime = pygame.time.get_ticks()
+    def update(self):
+        time = pygame.time.get_ticks()
+        mouse = pygame.mouse.get_pos()
+        if pygame.mouse.get_pressed()[0] and time - self.starttime:
+            
+            newpos = (mouse[0]//64 - map_margin[0]//64, mouse[1]//64 - map_margin[1]//64)
+            print(self.map[newpos[1]][newpos[0]])
+
+    def getpos(self):
+        return (0, 0)
 
 
 

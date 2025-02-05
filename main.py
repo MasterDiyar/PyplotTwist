@@ -1,16 +1,14 @@
-import pygame
 import buildings.connected as n
 from config.const import *
 
 pygame.init()
 
-run = True
 clock = pygame.time.Clock()
 allsprites = pygame.sprite.Group()
 clock.tick(60)
-m = n.Map(sc, "saves/firstmap.txt")
+m = n.ClickMap(sc, "saves/firstmap.txt")
 l = m.draw()
-
+tf[0] = True
 
 #allsprites.add()
 while run:
@@ -20,8 +18,10 @@ while run:
     sc.fill((88, 88, 88))
     allsprites.update()
 
-    sc.blit(l,(128,64))    
-
+    if (tf[0]):
+        sc.blit(l, map_margin)    
+        m.update()
+        
 
 
     allsprites.draw(sc)

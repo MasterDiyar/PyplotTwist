@@ -7,8 +7,11 @@ class Button:
         self.colour = colour
     def clicked(self):
         return True
-    def update(self, event):
+    def update(self):
+        k = pygame.key.get_pressed()
         pygame.draw.rect(self.screen, self.colour, self.rect)
-        if event == pygame.MOUSEBUTTONDOWN:
+        if k[pygame.MOUSEBUTTONDOWN]:
             return self.clicked()
+    def getpos(self):
+        return self.rect.topleft
         

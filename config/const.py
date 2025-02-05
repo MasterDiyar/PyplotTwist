@@ -1,6 +1,9 @@
 import pygame
 
 sc = pygame.display.set_mode((1152, 768))
+run = True
+
+map_margin = (128, 64)
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -11,6 +14,7 @@ WHITE = (255, 255, 255)
 
 full_tilemap = pygame.image.load("buildings/image/tilemap.png").convert_alpha()
 
+tf = [False for _ in range(10)]
 
 tile_rects = {
     "GRASS": pygame.Rect(0, 0, 64, 64),
