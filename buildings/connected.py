@@ -2,7 +2,7 @@ import pygame
 from config.const import *
 
 class Map:
-    def __init__(self, surface, mapinfo):
+    def __init__(self, surface:pygame.Surface, mapinfo):
         self.map = []
         self.surface = surface
         self.full_tilemap = pygame.image.load("buildings/image/tilemap.png").convert_alpha()
@@ -39,13 +39,16 @@ class ClickMap(Map):
     def __init__(self, surface, mapinfo):
         super().__init__(surface, mapinfo)
         self.starttime = pygame.time.get_ticks()
+        self.clicked = False
     def update(self):
         time = pygame.time.get_ticks()
         mouse = pygame.mouse.get_pos()
-        if pygame.mouse.get_pressed()[0] and time - self.starttime:
+        if pygame.mouse.get_pressed()[0] and time - self.starttime >= 2000:
             
             newpos = (mouse[0]//64 - map_margin[0]//64, mouse[1]//64 - map_margin[1]//64)
-            print(self.map[newpos[1]][newpos[0]])
+            self.clicked = True
+        if self.clicked:
+            self.surface.blit()
 
     def getpos(self):
         return (0, 0)

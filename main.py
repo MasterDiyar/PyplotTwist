@@ -1,4 +1,4 @@
-import buildings.connected as n
+import buildings as n
 from config.const import *
 
 pygame.init()
