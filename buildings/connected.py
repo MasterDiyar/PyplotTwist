@@ -1,8 +1,9 @@
 import pygame
 from config.const import *
+from .blueprint import *
 
 class Map:
-    def __init__(self, surface:pygame.Surface, mapinfo):
+    def __init__(self, surface, mapinfo):
         self.map = []
         self.surface = surface
         self.full_tilemap = pygame.image.load("buildings/image/tilemap.png").convert_alpha()
@@ -40,6 +41,7 @@ class ClickMap(Map):
         super().__init__(surface, mapinfo)
         self.starttime = pygame.time.get_ticks()
         self.clicked = False
+        self.bp = Blueprint()
     def update(self):
         time = pygame.time.get_ticks()
         mouse = pygame.mouse.get_pos()
@@ -48,7 +50,7 @@ class ClickMap(Map):
             newpos = (mouse[0]//64 - map_margin[0]//64, mouse[1]//64 - map_margin[1]//64)
             self.clicked = True
         if self.clicked:
-            self.surface.blit()
+            self.bp.draw(self.surface)
 
     def getpos(self):
         return (0, 0)

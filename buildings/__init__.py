@@ -1,2 +1,2 @@
-from blueprint import *
-from connected import *
+from .blueprint import *
+from .connected import *
