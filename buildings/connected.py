@@ -41,16 +41,21 @@ class ClickMap(Map):
         super().__init__(surface, mapinfo)
         self.starttime = pygame.time.get_ticks()
         self.clicked = False
-        self.bp = Blueprint()
+        self.bp = Building()
+        self.newpos = (0,0)
     def update(self):
+        keys = pygame.key.get_pressed()
         time = pygame.time.get_ticks()
         mouse = pygame.mouse.get_pos()
         if pygame.mouse.get_pressed()[0] and time - self.starttime >= 2000:
-            
-            newpos = (mouse[0]//64 - map_margin[0]//64, mouse[1]//64 - map_margin[1]//64)
+            self.bp.clear()
+            self.newpos = (mouse[0]//64 - map_margin[0]//64, mouse[1]//64 - map_margin[1]//64)
             self.clicked = True
         if self.clicked:
             self.bp.draw(self.surface)
+            self.bp.reader(self.newpos)
+        if keys[pygame.K_ESCAPE]:
+            self.clicked = False
 
     def getpos(self):
         return (0, 0)
