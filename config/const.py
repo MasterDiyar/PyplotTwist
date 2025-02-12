@@ -3,6 +3,9 @@ import pygame
 sc = pygame.display.set_mode((1152, 768))
 run = True
 
+pygame.font.init()
+font = pygame.font.Font("config/Russian.ttf", 15)
+
 map_margin = (128, 64)
 
 RED = (255, 0, 0)

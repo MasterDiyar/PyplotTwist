@@ -5,8 +5,10 @@ def decoder(data:list[list[str]], types, pix):
             for i in range(len(data)):
                 for j in range(len(data[i])):
                     turn[i].append(farm(data[i][j]))
-
-    return turn[pix[0]][pix[1]]
+    try:
+        return turn[pix[1]][pix[0]]
+    except IndexError:
+        return "nothing"
 
 def farm(data):
     t = ""

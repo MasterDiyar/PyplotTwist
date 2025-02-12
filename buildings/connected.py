@@ -11,7 +11,7 @@ class Map:
             all = line.readlines()
             for l in all:
                 self.map.append(l.split())
-    def draw(self):
+    def draw(self, screen):
         map = pygame.Surface((len(self.map[0]) * 64,len(self.map) * 64))
         
         for i in range(len(self.map)):
@@ -33,7 +33,7 @@ class Map:
                         map.blit(tiles["DESERT"], (j*64, i*64))
                     case "8":
                         map.blit(tiles["MOUNTAIN"], (j*64, i*64))
-        return map
+        screen.blit(map, map_margin)
     
 
 class ClickMap(Map):
