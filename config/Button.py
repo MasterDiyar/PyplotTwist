@@ -1,36 +1,34 @@
-from email.encoders import encode_base64
-
 import pygame
 import pygame.sprite
 
-from config import BLACK
-
+from config import *
+from config.const import *
 
 class Button:
-    def __init__(self, colour, screen,x, y, width, height):
+    def __init__(self, colour, screen,x, y, width, height, name = "none"):
+        self.name = name
         self.rect = pygame.Rect(x, y, width, height)
         self.screen =screen
         self.colour = colour
         self.clicked = False
     def update(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
-            print(f"Clicked in{pygame.mouse.get_pos()}")
             if self.rect.collidepoint(pygame.mouse.get_pos()):
                 self.clicked = True
         return self.clicked
     def draw(self):
         self.clicked = False
-        pygame.draw.rect(self.screen, self.colour, self.rect)
+        pygame.draw.rect(self.screen, self.colour, self.rect, border_radius=5)
     def getpos(self):
         return self.rect.topleft
 
 class ImageButton(Button, pygame.sprite.Sprite):
-    def __init__(self, screen, image):
+    def __init__(self, screen, image, name = "none"):
         self.image = pygame.image.load(image)
         self.rect = self.image.get_rect()
         self.screen = screen
         a = self.rect
-        super().__init__(Button(self, BLACK, screen, a.x, a.y, a.width, a.height), pygame.sprite.Sprite(self) )
+        super().__init__(Button(self, BLACK, screen, a.x, a.y, a.width, a.height, name), pygame.sprite.Sprite(self) )
     def update(self, event):
         self.clicked = False
         self.screen.blit(self.image, self.rect)
@@ -40,14 +38,34 @@ class ImageButton(Button, pygame.sprite.Sprite):
         return self.clicked
 
 class TextButton(Button):
-    def __init__(self, screen, pos, text, color):
-        self.rect = pos
+    def __init__(self, screen, pos, text, color, name="none"):
+        self.pos = pos
         self.width = 9 * len(text) + 30
-        self.text = text
+        self.text = font.render(text, True, BLACK)
         self.screen = screen
-        super().__init__(color, self.screen, pos[0], pos[1], self.width, 80)
+        self.name = name if name!="none" else text
+        super().__init__(color, self.screen, pos[0], pos[1], self.width, 50)
+    def draw(self):
+        pygame.draw.rect(self.screen, self.colour, self.rect, border_radius=15)
+        self.screen.blit(self.text, (self.rect.x+15, self.rect.y+15))
+        self.clicked = False
 
+class ButtonBox:
+    def __init__(self):
+        self.buttons = []
 
+    def add(self, button):
+        self.buttons.append(button)
+    def draw(self):
+        for button in self.buttons:
+            button.draw()
+    def update(self, event):
+        for button in self.buttons:
+            button.update(event)
+    def getname(self, name, event):
+        for button in self.buttons:
+            if button.name == name:
+                return button.update(event)
 
 
 

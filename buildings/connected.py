@@ -43,10 +43,12 @@ class ClickMap(Map):
         self.clicked = False
         self.bp = Building()
         self.newpos = (0,0)
+        self.nmap=self.bp.nmap
     def update(self):
         keys = pygame.key.get_pressed()
         time = pygame.time.get_ticks()
         mouse = pygame.mouse.get_pos()
+        self.nmap = self.bp.nmap
         if pygame.mouse.get_pressed()[0] and time - self.starttime >= 2000:
             self.bp.clear()
             self.newpos = (mouse[0]//64 - map_margin[0]//64, mouse[1]//64 - map_margin[1]//64)

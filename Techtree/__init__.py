@@ -36,7 +36,7 @@ class TechTree:
                 return True
             else:
                 print(f"Cannot unlock {name}, requirements not met or insufficient resources.")
-                print(f"required resources : {self.resources}")
+                print(f"required resources : {tech.cost}")
         return False
 
     def save_file(self, filename):

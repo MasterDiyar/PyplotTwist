@@ -4,7 +4,7 @@ sc = pygame.display.set_mode((1152, 768))
 run = True
 
 pygame.font.init()
-font = pygame.font.Font("config/Russian.ttf", 15)
+font = pygame.font.SysFont("TimesNewRoman", 15)
 
 map_margin = (128, 64)
 
@@ -14,6 +14,10 @@ BLUE = (0, 0, 255)
 GRAY = (88, 88, 88)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+LIGHTGRAY=(200,200,200)
+LIGHTBLUE=(180, 202, 237)
+LIGHTRED=(230, 189, 184)
+LIGHTGREEN=(230, 189, 184)
 
 full_tilemap = pygame.image.load("buildings/image/tilemap.png").convert_alpha()
 

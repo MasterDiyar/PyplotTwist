@@ -6,11 +6,11 @@ pygame.init()
 screen = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 
-n = False
+n = 200
 
 tree = TechTree()
 tree.add_tech("Mining", 100, 100)
-tree.add_tech("Advanced Mining", 300, 120, ["Mining", n])
+tree.add_tech("Advanced Mining", 300, 120, ["Mining"], {"stone":500})
 tree.add_tech("Metalnotworking", 100, 200, ["Mining"])
 tree.add_tech("Metalworking", 500, 300, ["Metalnotworking","Advanced Mining"])
 
@@ -30,8 +30,8 @@ while running:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
 
-                n = not n
-                print(n)
+                n = 500
+
     tree.draw(screen)
     pygame.display.flip()
     clock.tick(60)

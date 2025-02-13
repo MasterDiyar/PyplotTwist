@@ -23,23 +23,23 @@ class Blueprint:
 class Building(Blueprint):
     def __init__(self):
         Blueprint.__init__(self)
+        self.nmap = []
 
     def reader(self, pos:tuple):
         with open("saves/firstmap.info", "r") as f:
             m = f.readlines()
-        n= []
+        self.nmap= []
         for line in m:
             c = line.split(" ")[:-1]
             c.append((line.split(" ")[-1])[0:2])
-            n.append(c)
-        l =  decoder(n, "farm", pos).split("#")
+            self.nmap.append(c)
+        l =  decoder(self.nmap, "farm", pos).split("#")
         for i in l:
             if i != "nothing":
                 print(i)
                 self.add(self.mader(i))
 
     def mader(self, a):
-
         n = pygame.image.load("buildings/image/"+a+".png").convert_alpha()
         return n
 
