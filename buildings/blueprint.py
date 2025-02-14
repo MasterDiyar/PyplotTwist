@@ -35,9 +35,8 @@ class Building(Blueprint):
             self.nmap.append(c)
         l =  decoder(self.nmap, "farm", pos).split("#")
         for i in l:
-            if i != "nothing":
-                print(i)
-                self.add(self.mader(i))
+
+            self.add(self.mader(i))
 
     def mader(self, a):
         n = pygame.image.load("buildings/image/"+a+".png").convert_alpha()

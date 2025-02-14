@@ -20,10 +20,11 @@ class Technology:
         return False
 
 
+
 class TechTree:
-    def __init__(self):
+    def __init__(self, resources):
         self.techs = {}
-        self.resources = {"stone": 200, "glass": 100}
+        self.resources = resources
 
     def add_tech(self, name, x, y, requirements=None, cost=None):
         self.techs[name] = Technology(name, x, y, requirements, cost)
@@ -32,7 +33,6 @@ class TechTree:
         if name in self.techs:
             tech = self.techs[name]
             if tech.unlock([t for t, obj in self.techs.items() if obj.unlocked], self.resources):
-                print(f"{name} unlocked!")
                 return True
             else:
                 print(f"Cannot unlock {name}, requirements not met or insufficient resources.")
@@ -56,7 +56,7 @@ class TechTree:
                                                   info.get("cost", {}))
                     self.techs[name].unlocked = info["unlocked"]
         except FileNotFoundError:
-            print("Save file not found, starting fresh.")
+            print("File not found.")
 
     def draw(self, screen):
         for name, tech in self.techs.items():
@@ -71,7 +71,9 @@ class TechTree:
                     pygame.draw.line(screen, (255, 255, 255), tech.rect.center, self.techs[req].rect.center, 2)
 
     def handle_click(self, pos):
+
         for name, tech in self.techs.items():
             if tech.rect.collidepoint(pos):
-                self.unlock_technology(name)
+
+                return (self.unlock_technology(name), name)
 

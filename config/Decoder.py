@@ -1,14 +1,17 @@
-def decoder(data:list[list[str]], types, pix):
+def decoder(data:list[list[str]], types, pix, all=False):
     turn = [[] for _ in range(8)]
     match types:
         case "farm":
             for i in range(len(data)):
                 for j in range(len(data[i])):
                     turn[i].append(farm(data[i][j]))
-    try:
-        return turn[pix[1]][pix[0]]
-    except IndexError:
-        return "nothing"
+    if all:
+        return turn
+    else :
+        try:
+            return turn[pix[1]][pix[0]]
+        except IndexError:
+            return "nothing"
 
 def farm(data):
     t = ""
@@ -49,4 +52,23 @@ def reset(file):
     with open(file, "w") as f:
         for i in mad:
             f.write(" ".join(map(str, i)) + "\n")
+
+def gettilefromtextpos(pos):
+    with open("saves/firstmap.txt", "r") as f:
+        sadas = f.readlines()
+        for i in range(len(sadas)):
+            for j in range(len(sadas[i].split())):
+                if i == pos[1] and j == pos[0]:
+                    return sadas[i].split()[j]
+
+def tiledecode(num):
+    match num:
+        case 1:return "GRASS"
+        case 2: return "FARMLAND"
+        case 3: return "WATER"
+        case 4: return "FOREST"
+        case 5: return "SAVANNA"
+        case 6: return  "ASHLAND"
+        case 7: return "DESERT"
+        case 8: return "MOUNTAIN"
 

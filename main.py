@@ -1,47 +1,44 @@
 import buildings as n
-from config.const import *
+from buildings import Building
+from config import *
 import menu
-
+import game
 pygame.init()
 
 clock = pygame.time.Clock()
-allsprites = pygame.sprite.Group()
-btns = pygame.sprite.Group()
 clock.tick(60)
-m = n.ClickMap(sc, "saves/firstmap.txt")
 tf[0] = True
-
-loadnew = menu.menu.choosemenu()
+the_game = game.Game("EASY")
 b = menu.menu.exitmenu()
 mu = menu.menu.menu()
-#allsprites.add()
-
 
 while run:
     sc.fill((88, 88, 88))
     for event in pygame.event.get():
         if tf[0]:
-            mu.use(event)
-        if tf[1]:
-            loadnew.use(event)
+            randomval = mu.use(event)
+            if randomval is not None:
+                the_game = game.Game(randomval)
+
+        if tf[2]:
+            the_game.update(event)
         if event.type == pygame.QUIT:
             run = False
 
-    allsprites.update()
 
 
     if tf[0]:
         mu.draw()
-    if tf[1]:
-        loadnew.draw()
+
 
     if tf[2]:
-        m.draw(sc)
-        m.update()
+        the_game.draw()
+
+    if tf[3]:
+        with open("saves/final.txt", "r") as f:
+            drawtext(sc, f.readline(), (128, 128), (255, 255, 255))
         
 
-
-    allsprites.draw(sc)
     pygame.display.flip()
 
 safe_exit = True
@@ -65,6 +62,7 @@ while safe_exit:
     b.draw()
 
     pygame.display.flip()
+m = Building()
 if safer:
     print(m.nmap)
     text = ""

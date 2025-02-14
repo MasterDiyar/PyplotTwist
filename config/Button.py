@@ -12,9 +12,11 @@ class Button:
         self.colour = colour
         self.clicked = False
     def update(self, event):
+        self.clicked = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(pygame.mouse.get_pos()):
                 self.clicked = True
+
         return self.clicked
     def draw(self):
         self.clicked = False
@@ -67,8 +69,20 @@ class ButtonBox:
             if button.name == name:
                 return button.update(event)
 
-
-
+class GoldenButton(Button):
+    def __init__(self, screen, pos, text, color):
+        self.pos = pos
+        self.width = 9 * len(text) + 30
+        self.text = font.render(text, True, BLACK)
+        self.screen = screen
+        self.clicked = False
+        self.goldenrect = pygame.Rect(self.pos[0]-5, self.pos[1]-5, self.width+10, 60)
+        super().__init__(color, self.screen, pos[0], pos[1], self.width, 50)
+    def draw(self):
+        pygame.draw.rect(self.screen, GOLDEN, self.goldenrect, border_radius=20)
+        pygame.draw.rect(self.screen, self.colour, self.rect, border_radius=15)
+        self.screen.blit(self.text, (self.rect.center[0]-self.width/4, self.rect.y+15))
+        self.clicked = False
 
 
         
